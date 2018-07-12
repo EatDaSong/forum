@@ -20,7 +20,7 @@ if(isset($_SESSION['login'])) {
         include('profil/profil.php');
     }
 }   else    {   
-    header("Location: index.php?page=404");
+    echo '<script>redirect("index.php?page=404");</script>';
 }
 
 ?>

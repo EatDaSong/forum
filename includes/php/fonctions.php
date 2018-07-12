@@ -1,7 +1,7 @@
 <?php
 
 //Fonctions création/édition des session
-function setSession($id_user,$pseudo,$username,$password,$email,$signature,$rang) {
+function setSession($id_user, $pseudo, $username, $password, $email, $signature, $rang) {
     $_SESSION['login'] = true;
     $_SESSION['id_user'] = $id_user;
     $_SESSION['pseudo'] = $pseudo;
@@ -14,6 +14,11 @@ function setSession($id_user,$pseudo,$username,$password,$email,$signature,$rang
 
 //Confirmation de connection et redirection
 function confirmLogin($pseudo) {
-    echo "<div class='msgNotifGreen'>Bonjour ".$pseudo.", tu vas être redirigé vers la page principal dans 3 secondes.</div>";
-    header( "refresh:3;url=index.php" );
+    ?>
+    <script>
+        redirect("?page=index.php", 3000); //erreur de connection, les IDs ne correspondent pas
+    </script>
+    <div class='msgNotifGreen'>Bonjour <?php echo $pseudo; ?>, tu vas être redirigé vers la page principal dans 3 secondes.</div>
+    <?php
 }
+?>

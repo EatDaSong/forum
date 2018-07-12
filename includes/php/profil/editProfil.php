@@ -79,21 +79,22 @@ if(isset($_SESSION['login'])){
                 if($input) {
                     $bdd->exec("UPDATE user SET ".$requete." WHERE id='".$_SESSION['id_user']."'");
                     setSession($_SESSION['id_user'], $pseudo, $username, $_SESSION['password'], $email, $signature, $_SESSION['rang']);
-                    echo "<div class'msgNotifGreen'>Votre profil a bien été édité, vous allez être redirigé vers la page de profil dans 3 secondes.</div>";
-                    header( "refresh:3;url=?page=profil" );
+                    echo "<div class='msgNotifGreen'>Votre profil a bien été édité, vous allez être redirigé vers la page de profil dans 3 secondes.</div>";
+                    echo "<script>redirect('?page=profil', 3000);</script>";
                 }
             }   else    {
                 echo "<div class='msgNotifRed'>Votre mot de passe est faux, vous allez être redirigé vers la page de profil dans 3 secondes.</div>";
-                header( "refresh:3;url=?page=profil" );
+                echo "<script>redirect('?page=profil', 3000);</script>";
             }
         }   else    {
             echo "<div class='msgNotifRed'>Veuillez entrez un mot de passe, vous allez être redirigé vers la page de profil dans 3 secondes.</div>";
+            echo "<script>redirect('?page=profil', 3000);</script>";
         }
     }   else { 
-        header('Location: index.php?page=profil');
+        echo "<script>redirect('?page=profil');</script>";
     }
 }   else    {
-    header('Location: index.php');
+    echo "<script>redirect('index.php');</script>";
 }
 
 ?>

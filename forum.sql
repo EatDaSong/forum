@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  jeu. 05 juil. 2018 à 22:27
+-- Généré le :  jeu. 12 juil. 2018 à 14:50
 -- Version du serveur :  5.7.21
 -- Version de PHP :  5.6.35
 
@@ -25,26 +25,84 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `conversation`
+-- Structure de la table `categorie`
 --
 
-DROP TABLE IF EXISTS `conversation`;
-CREATE TABLE IF NOT EXISTS `conversation` (
-  `ID` int(5) NOT NULL AUTO_INCREMENT,
-  `pseudo_envoyeur` text NOT NULL,
-  `pseudo_receveur` text NOT NULL,
+DROP TABLE IF EXISTS `categorie`;
+CREATE TABLE IF NOT EXISTS `categorie` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `titre` text NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `forum`
+--
+
+DROP TABLE IF EXISTS `forum`;
+CREATE TABLE IF NOT EXISTS `forum` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id_categorie` int(5) NOT NULL,
+  `titre` text NOT NULL,
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `mp`
+--
+
+DROP TABLE IF EXISTS `mp`;
+CREATE TABLE IF NOT EXISTS `mp` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
   `id_envoyeur` int(5) NOT NULL,
   `id_receveur` int(5) NOT NULL,
+  `pseudo_envoyeur` text NOT NULL,
   `titre` text NOT NULL,
-  PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `text` text NOT NULL,
+  `lu` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
 
 --
--- Déchargement des données de la table `conversation`
+-- Structure de la table `msg_topic`
 --
 
-INSERT INTO `conversation` (`ID`, `pseudo_envoyeur`, `pseudo_receveur`, `id_envoyeur`, `id_receveur`, `titre`) VALUES
-(1, 'aze', 'aze', 4, 5, 'aze');
+DROP TABLE IF EXISTS `msg_topic`;
+CREATE TABLE IF NOT EXISTS `msg_topic` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_topic` int(11) NOT NULL,
+  `id_createur` int(11) NOT NULL,
+  `pseudo_createur` text NOT NULL,
+  `titre` text NOT NULL,
+  `message` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `topic`
+--
+
+DROP TABLE IF EXISTS `topic`;
+CREATE TABLE IF NOT EXISTS `topic` (
+  `id` int(5) NOT NULL AUTO_INCREMENT,
+  `id_forum` int(5) NOT NULL,
+  `titre` text NOT NULL,
+  `description` text NOT NULL,
+  `pseudo_createur` text NOT NULL,
+  `id_createur` int(5) NOT NULL,
+  `premier_message` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -62,19 +120,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `rang` int(5) NOT NULL COMMENT 'rang de droit utilisateur',
   `signature` text COMMENT 'signature user',
   PRIMARY KEY (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1 COMMENT='Table comptes utilisateurs';
-
---
--- Déchargement des données de la table `user`
---
-
-INSERT INTO `user` (`ID`, `pseudo`, `username`, `password`, `email`, `rang`, `signature`) VALUES
-(4, 'steph2608', 'BouffeMaDub', '4c4fe97fa74afaae3eb34c4e85ac0daf', 'stephane.lavigne2608@gmail.com', 0, 'hédoniste, roi de la procrastination auto proclamé, me voilà tel que je compte m\'affirmer.'),
-(6, 'azeaze', 'azeaze', '7c37be7260f8cd7c1f5e4dbdd7bc5b23', 'aze@aze.fr', 0, NULL),
-(7, 'GregLeZboub', 'greg123', '7c37be7260f8cd7c1f5e4dbdd7bc5b23', 'greg@greg.com', 0, NULL),
-(8, 'azeqsd', 'aze', '7c37be7260f8cd7c1f5e4dbdd7bc5b23', 'azea@azea.fr', 0, NULL),
-(9, 'ellynsel', 'ellyn', 'ab4f63f9ac65152575886860dde480a1', 'lyn.selvini@gmail.com', 0, NULL),
-(10, 'azeazeazeaze', 'viradosol', '7c37be7260f8cd7c1f5e4dbdd7bc5b23', 'azeazeaze@azeaze.aze', 0, NULL);
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1 COMMENT='Table comptes utilisateurs';
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

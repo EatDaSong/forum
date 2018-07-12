@@ -2,9 +2,10 @@
 if(isset($_SESSION['login']))   {
     session_destroy();
     echo "<div class='msgNotifGreen'>Déconnection, redirection vers la page de login dans 3s</div>";
-    header("refresh:3;url=index.php?page=inscription");
+    echo "<script>redirect('index.php?page=inscription', 3000);</script>";
 }   else    {
-    header('Location: index.php');
+    echo "<script>redirect('index.php');</script>";
+
 }
 
 ?>

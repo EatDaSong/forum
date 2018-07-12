@@ -8,5 +8,6 @@ if(isset($_SESSION['login'])) {
         echo "pas de conversation";
     }
 }   else    {
-    header('Location: index.php?page=404');
+    echo "<script>redirect('index.php?page=404');</script>";
 }
+?>
